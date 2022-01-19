@@ -14,17 +14,25 @@
       </div>
       <div class="top-bar-child right">
         <h4>Time:</h4>
+        <input type="number" id="input" />
       </div>
     </section>
-    <section class="main-container intro">
-        <h1 id="intro">Coding Quiz Challenge</h1>
-    </section>
-    <section class="main-container game">
-        <div class="question">
-        </div>
-        <div class="choice"></div>
-        <div class="result"></div>
-    </section>
+<main>
+  <div class="intro quiz-title"><h1>Coding Quiz Challenge</h1></div>
+
+  <div class="intro">Try to answer the following code•related questions Within the time lirnit. Keep in mind that incorrect answers will penalize score/time by ten seconds!</div>
+
+  <input id="start" type="button" value="Start" />
+</div>
+
+<div class="question"></div>
+<ul class="choiceList"></ul>
+<div class="quizMessage"></div>
+<div class="result"></div>
+</div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
