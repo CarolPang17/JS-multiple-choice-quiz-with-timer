@@ -1,4 +1,3 @@
-
 var questions = [
   {
     question: "Commonly used data types DO Not Include:",
@@ -45,19 +44,21 @@ var questions = [
   },
 ];
 
-$(function () {
-  var timer = 75,
-    interval = 1000,
-    value = 76;
-  $("#input").val("0");
-  $("#start").click(function () {
-    if (timer !== 75) return;
-    timer = setInterval(function () {
-      $("#input").val(--value);
-    }, interval);
-    var goQ1 = document.getElementsByClassName("intro");
-    goQ1[0].innerHTML = "Question 1";
-    goQ1[1].innerHTML = "choices";
 
-  });
+var timer = 75;
+var interval = 1000;
+var value = 76;
+
+$("#start").click(function () {
+  if (timer !== 75) return;
+  timer = setInterval(function () {
+    $("#input").val(--value);
+  }, 1000);
+  var goQ1 = document.getElementsByClassName("intro");
+  goQ1[0].innerHTML = "Question 1";
+  goQ1[1].innerHTML = "choices";
+  $("#start").remove();
+  displayCurrentQuestion();
 });
+
+
