@@ -1,5 +1,4 @@
 .top-bar {
-  /* display: flex; */
   overflow:auto;
 }
 .left {
@@ -21,4 +20,47 @@ main {
 
 input[type=number] {
   border: none;
+}
+
+///////////////////////////
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 800px;
+  max-width: 80%;
+  border: 3px solid red;
+}
+
+.btn-grid {
+  display: grid;
+  gap: 10px;
+  border: 3px solid blue;
+  margin: 1em;
+  margin-left: 0em;
+}
+
+.btn {
+  border: 3px solid orange;
+  background-color: rgb(59, 41, 160);
+  color: white;
+  padding: 5px 10px;
+}
+
+.btn:hover {
+  background-color: rgb(204, 99, 178);
+}
+
+.hide {
+  display: none;
 }
