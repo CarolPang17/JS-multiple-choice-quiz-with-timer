@@ -2,24 +2,28 @@ var title = document.getElementById("title");
 var time = 75;
 var myInterval;
 
+const introPage = document.getElementById("intro");
 const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
+const answerResult = document.getElementById("yesOrNo");
+var TimerDisplay = document.querySelector("#time");
 let shuffledQuestions, currentQuestionIndex;
 
 startButton.addEventListener("click", startGame);
-nextButton.addEventListener("click", () => {
-  currentQuestionIndex++;
-  setNextQuestion();
-});
+
+/////////delete below////////////
+
+// nextButton.addEventListener("click", () => {
+//   currentQuestionIndex++;
+//   setNextQuestion();
+// });
 
 function startGame() {
-  myInterval = setInterval(function () {
-    time--;
-    title.innerText = time;
-  }, 1000);
+  downloadTimer();
+  introPage.classList.add("hide");
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
@@ -27,8 +31,37 @@ function startGame() {
   setNextQuestion();
 }
 
-function setNextQuestion() {
+var timeleft = 75;
+function downloadTimer() {
+  setInterval(function () {
+    if (timeleft <= 0) {
+      clearInterval(downloadTimer);
+      document.getElementById("countdown").innerHTML = "Finished";
+    } else {
+      document.getElementById("countdown").innerHTML = timeleft;
+    }
+    timeleft -= 1;
+  }, 1000);
+}
+
+function setNextQuestion(correct) {
   resetState();
+  if (currentQuestionIndex === 0) {
+    answerResult.innerText = "";
+  }
+  if (correct) {
+    if (currentQuestionIndex === 0) {
+      answerResult.innerText = "";
+    } else {
+      answerResult.innerText = "Correct!";
+    }
+  } else {
+    if (currentQuestionIndex === 0) {
+      answerResult.innerText = "";
+    } else {
+      answerResult.innerText = "Wrong!";
+    }
+  }
   showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
@@ -63,6 +96,8 @@ function selectAnswer(e) {
   });
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
+    currentQuestionIndex++;
+    setNextQuestion(correct);
   } else {
     startButton.innerText = "Restart";
     startButton.classList.remove("hide");
