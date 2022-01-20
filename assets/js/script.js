@@ -26,10 +26,14 @@ let shuffledQuestions, currentQuestionIndex
 
 
 startButton.addEventListener('click', startGame)
+nextButton.addEventListener('click', () => {
+  currentQuestionIndex++
+  setNextQuestion()
+})
 
 function startGame() {
   startButton.classList.add("hide");
-  shuffledQuestions = questions.sort(() => Math.randon() - .5)
+  shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0;
   questionContainerElement.classList.remove("hide");
   setNextQuestion()
@@ -55,6 +59,7 @@ function showQuestion(question) {
 }
 
 function resetState() {
+  clearStatusClass(document.body)
   nextButton.classList.add('hide')
   while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild)
@@ -62,9 +67,33 @@ function resetState() {
 }
 
 function selectAnswer(e) {
-
+  const selectedButton = e.target
+  const correct = selectedButton.dataset.correct
+  setStatusClass(document.body, correct)
+  Array.from(answerButtonsElement.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct)
+  })
+  if(shuffledQuestions.length > currentQuestionIndex + 1) {
+  nextButton.classList.remove('hide')
+  } else {
+    startButton.innerText = "Restart";
+    startButton.classList.remove('hide')
+  }
 }
 
+function setStatusClass(element, correct) {
+  clearStatusClass(element)
+  if(correct){
+    element.classList.add('correct')
+  } else {
+    element.classList.add('wrong')
+  }
+}
+
+function clearStatusClass(element) {
+  element.classList.remove('correct')
+  element.classList.remove('wrong')
+}
 
 const questions = [
   {
@@ -76,44 +105,44 @@ const questions = [
       { text: "4.numbers", correct: false }
     ]
   }
-  // ,
-  // {
-  //   question:
-  //     "The condition in an if / else statement is enclosed with ______.",
-  //   answers: [
-  //     { text: "1. quotes", correct: false },
-  //     { text: "2. curly brackets", correct: false },
-  //     { text: "3. parenthesis", correct: true },
-  //     { text: "4. square brackets", correct: false }
-  //   ]
-  // },
-  // {
-  //   question: "Arrays in JavaScript can be used to store _____.",
-  //   answers: [
-  //     { text:  "1.numbers and strings", correct: false },
-  //     { text:  "2. other arrays", correct: false },
-  //     { text: "3. booleans", correct: false },
-  //     { text: "4. all of the above", correct: true }
-  //   ]
-  // },
-  // {
-  //   question:
-  //     "String values must be enclosed within ____ when being assigned to variables.",
-  //   answers: [
-  //     { text:  "1. commas", correct: false },
-  //     { text:  "2. curly brackets", correct: false },
-  //     { text: "3. quotes", correct: true },
-  //     { text: "4. parenthesis", correct: false }
-  //   ]
-  // },
-  // {
-  //   question:
-  //     "A very useful tool used during development and debugging for printing content to the debugger is: ",
-  //   answers: [
-  //     { text: "1. JavaScript", correct: false },
-  //     { text: "2. terminal/bash", correct: false },
-  //     { text: "3. for loops", correct: true },
-  //     { text: "4. console.log", correct: false }
-  //   ]
-  // }
+  ,
+  {
+    question:
+      "The condition in an if / else statement is enclosed with ______.",
+    answers: [
+      { text: "1. quotes", correct: false },
+      { text: "2. curly brackets", correct: false },
+      { text: "3. parenthesis", correct: true },
+      { text: "4. square brackets", correct: false }
+    ]
+  },
+  {
+    question: "Arrays in JavaScript can be used to store _____.",
+    answers: [
+      { text:  "1.numbers and strings", correct: false },
+      { text:  "2. other arrays", correct: false },
+      { text: "3. booleans", correct: false },
+      { text: "4. all of the above", correct: true }
+    ]
+  },
+  {
+    question:
+      "String values must be enclosed within ____ when being assigned to variables.",
+    answers: [
+      { text:  "1. commas", correct: false },
+      { text:  "2. curly brackets", correct: false },
+      { text: "3. quotes", correct: true },
+      { text: "4. parenthesis", correct: false }
+    ]
+  },
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is: ",
+    answers: [
+      { text: "1. JavaScript", correct: false },
+      { text: "2. terminal/bash", correct: false },
+      { text: "3. for loops", correct: true },
+      { text: "4. console.log", correct: false }
+    ]
+  }
 ];

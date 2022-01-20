@@ -1,4 +1,4 @@
-/* .top-bar {
+.top-bar {
   overflow:auto;
 }
 .left {
@@ -10,7 +10,7 @@
   padding-right:8em;
   display: flex;
 }
-
+/* 
 main {
   margin: auto;
   width: 50%;
@@ -92,6 +92,7 @@ body.wrong {
 
 .btn.wrong {
   --hue: var(--hue-wrong);
+
 }
 
 .start-btn, .next-btn {
