@@ -1,4 +1,4 @@
-.top-bar {
+/* .top-bar {
   overflow:auto;
 }
 .left {
@@ -20,27 +20,49 @@ main {
 
 input[type=number] {
   border: none;
-}
+} */
 
-///////////////////////////
+/* /////////////////////////// */
 
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-
+:root {
+  --hue-neutral: 200;
+  --hue-wrong: 0;
+  --hue-correct: 145;
+}
 
 body {
+  --hue: var(var(--hue-neutral))
   padding: 0;
   margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(var(--hue), 100%,20%);
+}
+
+body.correct {
+  --hue: var(--hue-correct);
+}
+
+body.wrong {
+  --hue: var(--hue-wrong);
 }
 
 .container {
   width: 800px;
   max-width: 80%;
   border: 3px solid red;
+  padding: 10px;
 }
+
+
 
 .btn-grid {
   display: grid;
@@ -51,14 +73,36 @@ body {
 }
 
 .btn {
+  --hue: var(--hue-neutral);
   border: 3px solid orange;
   background-color: rgb(59, 41, 160);
   color: white;
   padding: 5px 10px;
+  border-radius: 5px;
+  outline:none
 }
 
 .btn:hover {
   background-color: rgb(204, 99, 178);
+}
+
+.btn.correct {
+  --hue: var(--hue-correct);
+}
+
+.btn.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.start-btn, .next-btn {
+  font-size: 1.5rem;
+
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hide {
