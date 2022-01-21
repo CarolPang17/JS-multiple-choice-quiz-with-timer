@@ -33,14 +33,16 @@ function downloadTimer() {
 
 function updateSec() {
   if (timeleft <= 0 ) {
+    console.log('updateSec stop because time = 0 ||' , timeleft)
     clearInterval(refreshIntervalId);
     showFinalResult()
   } else {
     if(endGame){
+      console.log('updateSec stop because endGame ||' , timeleft)
       clearInterval(refreshIntervalId);
     } else {
       timeleft -= 1;
-      document.getElementById("countdown").innerHTML = timeleft;
+      showTime.innerHTML = timeleft;
     }
   }
 }
@@ -55,6 +57,7 @@ function showFinalResult() {
   } else {
     showTime.remove();
   }
+  showTime.classList.add('hide')
   finalScore[0].innerText = " " + timeleft;
   finalScore[1].innerText = " " + timeleft;
 }
@@ -182,25 +185,27 @@ const questions = [
 
 
 
-// const input = document.querySelector('input');
-// const log = document.getElementById('values');
-// const submit = document.getElementById('Submit');
-// var initals;
+const input = document.querySelector('input');
+const submit = document.getElementById('Submit');
+const HighScorePage = document.getElementById('High-score-page');
 
-// input.addEventListener('input', updateValue);
+var initals;
 
-// function updateValue(e) {
-//   initals = e.target.value;
-// }
+input.addEventListener('input', updateValue);
 
-// function logSubmit(event) {
+function updateValue(e) {
+  initals = e.target.value;
+}
 
-//   values.textContent = initals + "your score is :" + timeleft;
-//   event.preventDefault();
-// }
+function logSubmit(event) {
+  values.textContent = initals + " - " + timeleft;
+  finalScoreBox.classList.add('hide');
+  HighScorePage.classList.remove('hide');
+  event.preventDefault();
+}
 
-// const form = document.querySelector('form');
-// const values = document.getElementById('values');
-// form.addEventListener('submit', logSubmit);
+const form = document.querySelector('form');
+const values = document.getElementById('values');
+form.addEventListener('submit', logSubmit);
 
 

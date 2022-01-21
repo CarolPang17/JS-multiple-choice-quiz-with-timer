@@ -8,11 +8,11 @@
     <title>Document</title>
   </head>
   <body>
-    <section class="top-bar">
-      <div class="top-bar-child left">
+    <section class="bar">
+      <div class="bar-child left">
         <h4>View high scores</h4>
       </div>
-      <div class="top-bar-child right">
+      <div class="bar-child right">
         <h4>Time:</h4>
         <span id="countdown">0</span>
         <h4 class="final-score"></h4>
@@ -48,15 +48,22 @@
             <h4>Your final score is  </h4>
             <h4 class="final-score"></h4>
           </div>
+          <form id="initials-box" >
+            <label>Enter initials: </label>
+            <input name="name"/>
+            <button type="submit">Submit form</button>
+          </form>
         </section>
-        <form id="initials-box" class="hide">
-          <label>Enter initials: </label>
-          <input name="name"/>
-          <button type="submit">Submit form</button>
-        </form>
-        <p id="values"></p>
+        <section id="High-score-page" class="hide">
+          <p id="values"></p>
+          <div class="bar">
+            <button class="bar-child"> go back</button>
+            <button class="bar-child"> clear score</button>
+          </div>
+
+        </section>
       </div>
-      
+
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
