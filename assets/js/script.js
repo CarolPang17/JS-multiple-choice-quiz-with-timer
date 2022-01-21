@@ -7,8 +7,9 @@ const answerResult = document.getElementById("showResult");
 const finalScoreBox = document.getElementById("final-score-box");
 const finalScore = document.getElementsByClassName("final-score");
 const showTime = document.getElementById("countdown");
+const initialsBox = document.getElementById("initials-box");
 let shuffledQuestions, currentQuestionIndex;
-
+var endGame = false;
 startButton.addEventListener("click", startGame);
 
 function startGame() {
@@ -24,22 +25,31 @@ function startGame() {
 var timeleft = 75;
 
 
+var refreshIntervalId;
+
 function downloadTimer() {
-  setInterval(function () {
-    if (timeleft <= 0 ) {
-      clearInterval(downloadTimer);
-      showFinalResult()
-      document.getElementById("countdown").innerHTML = "time out!";
+  refreshIntervalId = setInterval(updateSec, 1000);
+}
+
+function updateSec() {
+  if (timeleft <= 0 ) {
+    clearInterval(refreshIntervalId);
+    showFinalResult()
+  } else {
+    if(endGame){
+      clearInterval(refreshIntervalId);
     } else {
+      timeleft -= 1;
       document.getElementById("countdown").innerHTML = timeleft;
     }
-    timeleft -= 1;
-  }, 1000);
+  }
 }
 
 function showFinalResult() {
+  endGame = true;
   questionContainerElement.classList.add("hide");
   finalScoreBox.classList.remove("hide");
+  initialsBox.classList.remove("hide");
   if(timeleft <= 0) {
     timeleft = 0;
   } else {
@@ -169,3 +179,28 @@ const questions = [
     ],
   },
 ];
+
+
+
+// const input = document.querySelector('input');
+// const log = document.getElementById('values');
+// const submit = document.getElementById('Submit');
+// var initals;
+
+// input.addEventListener('input', updateValue);
+
+// function updateValue(e) {
+//   initals = e.target.value;
+// }
+
+// function logSubmit(event) {
+
+//   values.textContent = initals + "your score is :" + timeleft;
+//   event.preventDefault();
+// }
+
+// const form = document.querySelector('form');
+// const values = document.getElementById('values');
+// form.addEventListener('submit', logSubmit);
+
+
