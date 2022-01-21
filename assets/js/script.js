@@ -5,14 +5,14 @@ const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const answerResult = document.getElementById("showResult");
 const finalScoreBox = document.getElementById("final-score-box");
-const finalScore = document.getElementById("final-score");
+const finalScore = document.getElementsByClassName("final-score");
 const showTime = document.getElementById("countdown");
 let shuffledQuestions, currentQuestionIndex;
 
 startButton.addEventListener("click", startGame);
 
 function startGame() {
-  downloadTimer(shuffledQuestions,currentQuestionIndex);
+  downloadTimer();
   introPage.classList.add("hide");
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
@@ -24,12 +24,12 @@ function startGame() {
 var timeleft = 75;
 
 
-function downloadTimer(shuffledQuestions,currentQuestionIndex) {
+function downloadTimer() {
   setInterval(function () {
-    if (timeleft <= 0) {
+    if (timeleft <= 0 ) {
       clearInterval(downloadTimer);
       showFinalResult()
-      document.getElementById("countdown").innerHTML = "Finished";
+      document.getElementById("countdown").innerHTML = "time out!";
     } else {
       document.getElementById("countdown").innerHTML = timeleft;
     }
@@ -43,9 +43,10 @@ function showFinalResult() {
   if(timeleft <= 0) {
     timeleft = 0;
   } else {
-    showTime.innerText = " " + timeleft;
+    showTime.remove();
   }
-  finalScore.innerText = " " + timeleft;
+  finalScore[0].innerText = " " + timeleft;
+  finalScore[1].innerText = " " + timeleft;
 }
 
 function setNextQuestion(correct) {
@@ -100,8 +101,6 @@ function selectAnswer(e) {
     setNextQuestion(correct);
   } else {
     showFinalResult();
-    startButton.innerText = "Restart";
-    startButton.classList.remove("hide");
   }
 }
 

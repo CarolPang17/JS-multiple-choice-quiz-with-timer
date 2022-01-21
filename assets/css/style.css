@@ -82,7 +82,7 @@ body {
   display: flex;
 }
 
-#final-score {
+.final-score {
   padding-left: 1em;
 }
 
