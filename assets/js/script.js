@@ -1,28 +1,18 @@
-var title = document.getElementById("title");
-var time = 75;
-var myInterval;
-
 const introPage = document.getElementById("intro");
 const startButton = document.getElementById("start-btn");
-const nextButton = document.getElementById("next-btn");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
-const answerResult = document.getElementById("yesOrNo");
-var TimerDisplay = document.querySelector("#time");
+const answerResult = document.getElementById("showResult");
+const finalScoreBox = document.getElementById("final-score-box");
+const finalScore = document.getElementById("final-score");
+const showTime = document.getElementById("countdown");
 let shuffledQuestions, currentQuestionIndex;
 
 startButton.addEventListener("click", startGame);
 
-/////////delete below////////////
-
-// nextButton.addEventListener("click", () => {
-//   currentQuestionIndex++;
-//   setNextQuestion();
-// });
-
 function startGame() {
-  downloadTimer();
+  downloadTimer(shuffledQuestions,currentQuestionIndex);
   introPage.classList.add("hide");
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
@@ -32,10 +22,13 @@ function startGame() {
 }
 
 var timeleft = 75;
-function downloadTimer() {
+
+
+function downloadTimer(shuffledQuestions,currentQuestionIndex) {
   setInterval(function () {
     if (timeleft <= 0) {
       clearInterval(downloadTimer);
+      showFinalResult()
       document.getElementById("countdown").innerHTML = "Finished";
     } else {
       document.getElementById("countdown").innerHTML = timeleft;
@@ -44,11 +37,19 @@ function downloadTimer() {
   }, 1000);
 }
 
+function showFinalResult() {
+  questionContainerElement.classList.add("hide");
+  finalScoreBox.classList.remove("hide");
+  if(timeleft <= 0) {
+    timeleft = 0;
+  } else {
+    showTime.innerText = " " + timeleft;
+  }
+  finalScore.innerText = " " + timeleft;
+}
+
 function setNextQuestion(correct) {
   resetState();
-  if (currentQuestionIndex === 0) {
-    answerResult.innerText = "";
-  }
   if (correct) {
     if (currentQuestionIndex === 0) {
       answerResult.innerText = "";
@@ -60,6 +61,7 @@ function setNextQuestion(correct) {
       answerResult.innerText = "";
     } else {
       answerResult.innerText = "Wrong!";
+      timeleft -=20;
     }
   }
   showQuestion(shuffledQuestions[currentQuestionIndex]);
@@ -81,7 +83,6 @@ function showQuestion(question) {
 
 function resetState() {
   clearStatusClass(document.body);
-  nextButton.classList.add("hide");
   while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild);
   }
@@ -95,14 +96,15 @@ function selectAnswer(e) {
     setStatusClass(button, button.dataset.correct);
   });
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove("hide");
     currentQuestionIndex++;
     setNextQuestion(correct);
   } else {
+    showFinalResult();
     startButton.innerText = "Restart";
     startButton.classList.remove("hide");
   }
 }
+
 
 function setStatusClass(element, correct) {
   clearStatusClass(element);

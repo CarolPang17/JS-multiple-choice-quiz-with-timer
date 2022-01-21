@@ -14,7 +14,7 @@
       </div>
       <div class="top-bar-child right">
         <h4>Time:</h4>
-       <span id="countdown">0</span>
+        <span id="countdown">0</span>
       </div>
     </section>
     <main>
@@ -36,12 +36,18 @@
             <button class="btn">Answer 3</button>
             <button class="btn">Answer 4</button>
           </div>
-          <div id='yesOrNo'>yes/NO!?!?</div>
+          <div id="showResult"></div>
         </div>
         <div class="controls">
-          <button id="start-btn" class="start-btn btn">**Start**</button>
-          <button id="next-btn" class="next-btn btn hide">**Next**</button>
+          <button id="start-btn" class="start-btn btn">Start</button>
         </div>
+        <section id="final-score-box" class="hide">
+          <h2>All done!</h2>
+          <div class="score-box">
+            <h4>Your final score is  </h4>
+            <h4 id="final-score">5</h4>
+          </div>
+        </section>
       </div>
     </main>
 

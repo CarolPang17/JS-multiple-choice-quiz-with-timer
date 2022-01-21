@@ -23,21 +23,13 @@ main {
   padding: 10px;
 }
 
-
-
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-:root {
-  --hue-neutral: 200;
-  --hue-wrong: 0;
-  --hue-correct: 145;
-}
 
 body {
-  --hue: var(var(--hue-neutral))
   padding: 0;
   margin: 0;
   width: 100vw;
@@ -45,15 +37,6 @@ body {
   justify-content: center;
   align-items: center;
   background-color: hsl(var(--hue), 100%,20%);
-}
-
-body.correct {
-  --hue: var(--hue-correct);
-  border: 3px solid green;
-}
-
-body.wrong {
-  --hue: var(--hue-wrong);
 }
 
 .container {
@@ -67,14 +50,12 @@ body.wrong {
 .btn-grid {
   display: grid;
   gap: 10px;
-  border: 3px solid blue;
   margin: 1em;
   margin-left: 0em;
 }
 
 .btn {
   --hue: var(--hue-neutral);
-  border: 3px solid orange;
   background-color: rgb(59, 41, 160);
   color: white;
   padding: 5px 10px;
@@ -86,17 +67,6 @@ body.wrong {
   background-color: rgb(204, 99, 178);
 }
 
-.btn.correct {
-  --hue: var(--hue-correct);
-  border: 3px solid green;
-  
-}
-
-.btn.wrong {
-  --hue: var(--hue-wrong);
-
-}
-
 .start-btn, .next-btn {
   font-size: 1.5rem;
 
@@ -106,6 +76,14 @@ body.wrong {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.score-box {
+  display: flex;
+}
+
+#final-score {
+  padding-left: 1em;
 }
 
 .hide {
