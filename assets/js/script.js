@@ -12,17 +12,23 @@ let shuffledQuestions, currentQuestionIndex;
 var endGame = false;
 startButton.addEventListener("click", startGame);
 
+var timeleft = 75;
+
 function startGame() {
+  endGame = false;
+  timeleft = 75;
+  showTime.innerHTML = timeleft;
+  showTime.classList.remove('hide');
+  HighScorePage.classList.add("hide");
+  finalScore[0].classList.add('hide');
+  currentQuestionIndex = 0;
   downloadTimer();
   introPage.classList.add("hide");
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
-  currentQuestionIndex = 0;
   questionContainerElement.classList.remove("hide");
   setNextQuestion();
 }
-
-var timeleft = 75;
 
 
 var refreshIntervalId;
@@ -55,7 +61,7 @@ function showFinalResult() {
   if(timeleft <= 0) {
     timeleft = 0;
   } else {
-    showTime.remove();
+    showTime.classList.add("hide");
   }
   showTime.classList.add('hide')
   finalScore[0].innerText = " " + timeleft;
@@ -183,11 +189,13 @@ const questions = [
   },
 ];
 
-
+//// after end game
 
 const input = document.querySelector('input');
 const submit = document.getElementById('Submit');
 const HighScorePage = document.getElementById('High-score-page');
+const goBackBtn = document.getElementById('go-back-btn');
+var scoreStorage = {};
 
 var initals;
 
@@ -207,5 +215,7 @@ function logSubmit(event) {
 const form = document.querySelector('form');
 const values = document.getElementById('values');
 form.addEventListener('submit', logSubmit);
+
+goBackBtn.addEventListener("click", startGame);
 
 
