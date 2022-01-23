@@ -223,29 +223,3 @@ form.addEventListener('submit', logSubmit);
 
 goBackBtn.addEventListener("click", firstPage);
 
-
-///////////////////////////////////////
-let historys = [];
-// example {id:1592304983049, title: 'Deadpool', year: 2015}
-const addhistory = (ev)=>{
-    ev.preventDefault();  //to stop the form submitting
-    let history = {
-        score: timeleft,
-        title: document.getElementById('userName').value,
-    }
-    historys.push(history);
-    document.forms[0].reset(); // to clear the form for the next entries
-    //document.querySelector('form').reset();
-
-    //for display purposes only
-    console.warn('added' , {historys} );
-    let pre = document.querySelector('#msg pre');
-    pre.textContent = '\n' + JSON.stringify(historys, '\t', 2);
-
-    //saving to localStorage
-    localStorage.setItem('MyhistoryList', JSON.stringify(historys) );
-}
-
-document.addEventListener('DOMContentLoaded', ()=>{
-    document.getElementById('submitBtn').addEventListener('click', addhistory);
-});
